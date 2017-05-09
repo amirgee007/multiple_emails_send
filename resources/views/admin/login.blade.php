@@ -19,7 +19,7 @@
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <form action="{{url('admin/dashboard')}}" method="post" >
+        <form action="{{url('admin')}}" method="post" >
             {{csrf_field()}}
 
             <div class="form-group has-feedback">

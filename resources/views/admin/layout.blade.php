@@ -44,7 +44,7 @@
     <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
-    @if(Auth::user() &&  Auth::user()->is_admin)
+    @if(Auth::user())
             @include('admin.header.header');
             @include('admin.sidebar.sidebar');
             @yield('content')

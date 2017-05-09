@@ -12,7 +12,7 @@ class  AuthController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = 'admin/dashboard';
     protected $guard = 'admin';
 
 
@@ -21,7 +21,6 @@ class  AuthController extends Controller
         if (Auth::user()) {
             return redirect('admin/dashboard');
         }
-
         return view('admin.login');
     }
 
