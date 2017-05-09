@@ -18,11 +18,7 @@ class CreateEmailsTable extends Migration
             $table->increments('id');
             $table->string('email');
             $table->integer('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('category_id')
-                ->references('id')->on('categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
 
