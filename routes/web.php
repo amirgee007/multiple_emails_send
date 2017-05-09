@@ -11,6 +11,42 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/admin', 'AdminAuth\AuthController@showLoginForm');
+
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::post('/admin/dashboard', 'Admin\AdminController@dashboard');
+    Route::get('/admin/dashboard', 'Admin\AdminController@dashboard');
+
+    Route::get('/admin/dashboard/logout', array('as' => 'logout',
+        'uses' => 'AdminAuth\AuthController@logout'));
+
+});
+
+
+Route::post( '/sendemail' , [
+    'as' => 'send.email',
+    'uses' => 'HomeController@sendEmail'
+]);
+
+Route::get('/create' , function (){
+
+
+    App\User::create([
+
+
+        'name' =>'amir',
+        'email' =>'amirgee007@yahoo.com',
+        'password' => bcrypt('123456'),
+        'is_admin' => '1',
+
+
+    ]);
+
+
 });
