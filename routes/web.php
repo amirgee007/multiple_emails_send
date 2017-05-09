@@ -36,14 +36,3 @@ Route::post( '/sendemail' , [
     'uses' => 'HomeController@sendEmail'
 ]);
 
-
-
-Route::get('/create' , function (){
-
-    App\User::create([
-        'name' =>'amir',
-        'email' =>'amirgee007@yahoo.com',
-        'password' => bcrypt('123456'),
-        'is_admin' => '1',
-    ]);
-});
