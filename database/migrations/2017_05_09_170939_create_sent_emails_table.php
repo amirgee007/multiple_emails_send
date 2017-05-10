@@ -19,6 +19,7 @@ class CreateSentEmailsTable extends Migration
             $table->integer('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('email_address');
+            $table->string('subject')->nullable();;
             $table->text('content')->nullable();
             $table->timestamps();
         });

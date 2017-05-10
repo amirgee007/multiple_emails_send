@@ -8,7 +8,7 @@ class SentEmail extends Model
 {
     protected $table = 'sent_emails';
 //  protected $guarded = ['id'];
-    protected $fillable = ['category_id', 'email_address', 'content', 'created_at'];
+    protected $fillable = ['category_id', 'email_address', 'content', 'subject','created_at'];
 
 
     public function category() {

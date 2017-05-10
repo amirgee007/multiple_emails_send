@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <select class="form-control " title="Select Category" name="category" required>
+                                    <select class="form-control " title="Select Category" name="category_id" required>
                                         <option value="">Select Category</option>
                                         @foreach($categories as $category)
                                             {{--<option value="{{ $category->id }}" @if(in_array($category->slug , $userRoles)) selected="selected" @endif >{{ $category->name}}</option>--}}

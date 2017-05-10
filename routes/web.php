@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -56,14 +58,30 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'as' => 'email.add',
         'uses' => 'Admin\EmailController@store'));
 
+
+
     ////////////////////////////////Sent Emails Routes///////////////////////////////////
     Route::get('/sentemails', array(
         'as' => 'sentemail.index',
         'uses' => 'Admin\SentEmailController@index'));
 
+    Route::get('/sentemails/show/{id}', array(
+        'as' => 'sentemail.show',
+        'uses' => 'Admin\SentEmailController@show'));
+
+    Route::get('/sentemails/{id}', array(
+        'as' => 'sentemail.delete',
+        'uses' => 'Admin\SentEmailController@destroy'));
+
+
     Route::get('/sendNew', array(
         'as' => 'sentemail.sendNew',
         'uses' => 'Admin\SentEmailController@create'));
+
+    Route::post('/sendNew/save', array(
+        'as' => 'sentemail.sendNew.save',
+        'uses' => 'Admin\SentEmailController@store'));
+
 
 
 

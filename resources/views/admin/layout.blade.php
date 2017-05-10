@@ -49,6 +49,7 @@
     @if(Auth::user())
             @include('admin.header.header');
             @include('admin.sidebar.sidebar');
+
             @yield('content')
 
             <footer class="main-footer">
@@ -158,6 +159,21 @@
                 $(".timepicker").timepicker({
                     showInputs: false
                 });
+
+
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#compose-textarea").wysihtml5();
+
+                window.setTimeout(function() {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                        $(this).remove();
+                    });
+                }, 4000);
             });
         </script>
 
