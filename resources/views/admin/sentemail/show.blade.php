@@ -39,7 +39,7 @@
 
                             </div>
                             <div class="mailbox-read-message">
-                                {{$sentEmail->content}}
+                                {!! $sentEmail->content!!}
                             </div>
                         </div>
                         <div class="box-footer">
