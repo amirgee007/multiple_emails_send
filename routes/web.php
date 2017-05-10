@@ -20,13 +20,52 @@ Route::get('/admin', 'AdminAuth\AuthController@showLoginForm');
 Route::post('/admin', 'AdminAuth\AuthController@login');
 
 
-Route::group(['middleware' => ['admin']], function () {
-    Route::post('/admin/dashboard', 'Admin\AdminController@dashboard');
-    Route::get('/admin/dashboard', 'Admin\AdminController@dashboard');
+Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
 
-    Route::get('/admin/dashboard/logout', array(
+    Route::post('/dashboard', array(
+        'as' => 'post.dashboard',
+        'uses' => 'Admin\AdminController@dashboard'));
+
+
+    Route::get('/dashboard', array(
+        'as' => 'get.dashboard',
+        'uses' => 'Admin\AdminController@dashboard'));
+
+
+    Route::get('/dashboard/logout', array(
         'as' => 'logout',
         'uses' => 'AdminAuth\AuthController@logout'));
+
+
+    ////////////////////////////////Category Routes///////////////////////////////////
+    Route::get('/category', array(
+        'as' => 'category.index',
+        'uses' => 'Admin\CategoryController@index'));
+
+      Route::post('/category/add', array(
+          'as' => 'category.add',
+          'uses' => 'Admin\CategoryController@store'));
+
+
+    ////////////////////////////////Emails Routes///////////////////////////////////
+    Route::get('/emails', array(
+        'as' => 'email.index',
+        'uses' => 'Admin\EmailController@index'));
+
+    Route::post('/emails/add', array(
+        'as' => 'email.add',
+        'uses' => 'Admin\EmailController@store'));
+
+    ////////////////////////////////Sent Emails Routes///////////////////////////////////
+    Route::get('/sentemails', array(
+        'as' => 'sentemail.index',
+        'uses' => 'Admin\SentEmailController@index'));
+
+    Route::get('/sendNew', array(
+        'as' => 'sentemail.sendNew',
+        'uses' => 'Admin\SentEmailController@create'));
+
+
 
 });
 

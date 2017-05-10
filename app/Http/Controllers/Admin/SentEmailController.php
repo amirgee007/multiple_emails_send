@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Email;
+use App\SentEmail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class EmailController extends Controller
+class SentEmailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class EmailController extends Controller
      */
     public function index()
     {
-        //
+        $sentEmails =SentEmail::all();
+
+        return view('admin.sentemail.index', compact('sentEmails' ));
     }
 
     /**
@@ -24,7 +27,8 @@ class EmailController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.sentemail.create' );
+
     }
 
     /**
@@ -41,10 +45,10 @@ class EmailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Email  $email
+     * @param  \App\SentEmail  $sentEmail
      * @return \Illuminate\Http\Response
      */
-    public function show(Email $email)
+    public function show(SentEmail $sentEmail)
     {
         //
     }
@@ -52,10 +56,10 @@ class EmailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Email  $email
+     * @param  \App\SentEmail  $sentEmail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Email $email)
+    public function edit(SentEmail $sentEmail)
     {
         //
     }
@@ -64,10 +68,10 @@ class EmailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Email  $email
+     * @param  \App\SentEmail  $sentEmail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Email $email)
+    public function update(Request $request, SentEmail $sentEmail)
     {
         //
     }
@@ -75,10 +79,10 @@ class EmailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Email  $email
+     * @param  \App\SentEmail  $sentEmail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Email $email)
+    public function destroy(SentEmail $sentEmail)
     {
         //
     }
