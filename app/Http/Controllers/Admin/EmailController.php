@@ -9,15 +9,21 @@ use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
+
+    protected $model;
+
+    public function __construct() {
+        $this->model = new \App\Email();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $emails =Email::all();
 
+        $emails =Email::all();
         $categories =Category::all();
 
         return view('admin.email.index', compact('emails' , 'categories' ));
@@ -41,7 +47,22 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+        $isExisting = Email::where('email' , $request->email)->first();
+
+
+        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL) === false && !$isExisting) {
+
+            $email = New Email();
+            $email->create($request->all());
+            session()->flash('alert-success', 'Email has been Successfully Created!');
+            return back();
+
+        } else {
+            session()->flash('alert-danger', 'Email is not valid or already existing');
+            return back();
+        }
+
     }
 
     /**
@@ -61,9 +82,14 @@ class EmailController extends Controller
      * @param  \App\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function edit(Email $email)
+    public function edit($id)
     {
-        //
+        $emails =Email::all();
+        $email =$this->model->where('id' , $id)->first();
+
+        $categories =Category::all();
+
+        return view('admin.email.edit', compact('emails' , 'categories' , 'email'));
     }
 
     /**
@@ -73,9 +99,21 @@ class EmailController extends Controller
      * @param  \App\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Email $email)
+    public function update(Request $request , $id)
     {
-        //
+
+        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL) === false) {
+
+            $email = Email::where('id' , $id)->first();
+
+            $email->update(['email' => $request->email]);
+            session()->flash('alert-success', 'Email has been Successfully Updated!');
+            return redirect()->route('email.index');
+
+        } else {
+            session()->flash('alert-danger', 'Email is not valid ');
+            return back();
+        }
     }
 
     /**
@@ -84,8 +122,13 @@ class EmailController extends Controller
      * @param  \App\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Email $email)
+    public function destroy($id)
     {
-        //
+
+        Email::where('id' , $id) ->delete();
+        session()->flash('alert-info', 'Emails has been Successfully deleted!');
+
+        return redirect()->route('email.index');
+
     }
 }

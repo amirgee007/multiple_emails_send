@@ -22,7 +22,7 @@ class CreateJobsTable extends Migration
             $table->unsignedInteger('available_at');
             $table->unsignedInteger('created_at');
 
-            $table->index(['queue', 'reserved_at']);
+//            $table->index(['queue', 'reserved_at']);
         });
     }
 

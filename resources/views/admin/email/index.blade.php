@@ -26,6 +26,8 @@
             </ol>
         </section>
 
+        @include('admin.alerts.alert')
+
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -38,14 +40,13 @@
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="tittle">Write Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="" required>
                                 </div>
 
                                 <div class="form-group">
                                     <select class="form-control " title="Select Category" name="category_id" required>
                                         <option value="">Select Category</option>
                                         @foreach($categories as $category)
-                                            {{--<option value="{{ $category->id }}" @if(in_array($category->slug , $userRoles)) selected="selected" @endif >{{ $category->name}}</option>--}}
                                             <option value="{{ $category->id }}" >{{ $category->title}}</option>
                                         @endforeach
                                     </select>
@@ -53,7 +54,7 @@
                             </div>
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Add New</button>
+                                <button type="submit" class="btn btn-primary">Save Email</button>
                             </div>
                         </form>
                     </div>
@@ -91,11 +92,11 @@
                             <td>{!! isset($email->created_at) ? @$email->created_at->diffForHumans() : 'Not Set'!!}</td>
                             <td>
 
-                                    <a href="#"><i class="fa fa-fw fa-pencil text-warning"></i></a>
+                                    <a href="{{route('email.edit' , $email->id)}}"><i class="fa fa-fw fa-pencil text-warning"></i></a>
 
                                      <a href="#"><i class="fa fa-fw fa-eye text-primary"></i></a>
 
-                                    <a onclick="deleteUser('1');" href="javascript:void(0)"><i class="fa fa-fw fa-times text-danger"></i></a>
+                                    <a onclick="return confirm('Are you sure to delete ?')" href="{{route('email.delete' , $email->id)}}"><i class="fa fa-fw fa-times text-danger"></i></a>
 
                             </td>
                         </tr>
@@ -127,15 +128,6 @@
                 "info": true,
                 "autoWidth": false
             });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-
-//            $("#roles").select2({
-//                placeholder: 'Select Roles'
-//            });
         });
     </script>
 

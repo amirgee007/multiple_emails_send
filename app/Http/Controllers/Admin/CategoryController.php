@@ -39,7 +39,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+        $category = Category::firstOrNew(['title' => $request->title]);
+        $category->title=$request->title;
+
+        $category->save();
+        session()->flash('alert-success', 'Category has been Successfully Created!');
+
+        return back();
     }
 
     /**
@@ -59,9 +66,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+
+        $category =Category::where('id' , $id)->first();
+
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -71,9 +81,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request , $id)
     {
-        //
+
+        $category = Category::where('id' , $id)->first();
+
+        $category->update(['title' => $request->title]);
+        session()->flash('alert-success', 'Category has been Successfully Updated!');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -82,8 +97,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+
+        Category::where('id' , $id) ->delete();
+        session()->flash('alert-info', 'Category has been Successfully deleted!');
+
+        return redirect()->route('category.index');
     }
 }

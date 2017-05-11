@@ -16,6 +16,7 @@
                 <li class="active">Category</li>
             </ol>
         </section>
+        @include('admin.alerts.alert')
 
         <section class="content">
             <div class="row">
@@ -29,7 +30,7 @@
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="tittle">Category Tittle</label>
-                                    <input type="text" class="form-control" id="tittle" name="tittle" placeholder="Enter Category Tittle">
+                                    <input type="text" class="form-control" id="tittle" name="title" placeholder="Enter Category Tittle">
                                 </div>
                             </div>
                             <div class="box-footer">
@@ -56,7 +57,7 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tittle</th>
+                            <th>Title</th>
                             <th>Created At</th>
                             <th>Action</th>
                         </tr>
@@ -69,11 +70,11 @@
                             <td>{!! isset($category->created_at) ? @$category->created_at->diffForHumans() : 'Not Set'!!}</td>
                             <td>
 
-                                    <a href="#"><i class="fa fa-fw fa-pencil text-warning"></i></a>
+                                    <a href="{{route('category.edit' , $category->id)}}"><i class="fa fa-fw fa-pencil text-warning"></i></a>
 
                                      <a href="#"><i class="fa fa-fw fa-eye text-primary"></i></a>
 
-                                    <a onclick="deleteUser('1');" href="javascript:void(0)"><i class="fa fa-fw fa-times text-danger"></i></a>
+                                <a onclick="return confirm('Are you sure to delete ?')" href="{{route('category.delete' , $category->id)}}"><i class="fa fa-fw fa-times text-danger"></i></a>
 
                             </td>
                         </tr>

@@ -63,7 +63,7 @@ class SentEmailController extends Controller
         }
 
         session()->flash('alert-success', 'Emails has been Successfully send and stored!');
-        return back();
+        return redirect()->route('sentemail.index');
 
     }
 

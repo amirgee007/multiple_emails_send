@@ -9,7 +9,7 @@
     <link href="{{ asset('assets/vendors/jasny-bootstrap/css/jasny-bootstrap.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/vendors/validation/dist/css/bootstrapValidator.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/vendors/iCheck/skins/minimal/blue.css') }}" rel="stylesheet"/>
-    <link href="{{ public_path('plugins/select2/select2.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/vendors/select2/select2-bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/custom_css/addnew_user.css') }}" rel="stylesheet">
 @stop
@@ -142,7 +142,7 @@
             $(".select2").select2();
 
             $("#roles").select2({
-                placeholder: 'Select Roles'
+                placeholder: 'Select Emails'
             });
 
             $('#example2').DataTable({
@@ -201,12 +201,7 @@
                 }
             });
         });
-        $(document).ready(function () {
 
-//            $("#roles").select2({
-//                placeholder: 'Select Roles'
-//            });
-        });
     </script>
 
 @endsection

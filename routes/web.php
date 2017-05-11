@@ -44,9 +44,25 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'as' => 'category.index',
         'uses' => 'Admin\CategoryController@index'));
 
-      Route::post('/category/add', array(
-          'as' => 'category.add',
-          'uses' => 'Admin\CategoryController@store'));
+    Route::post('/category/add', array(
+        'as' => 'category.add',
+        'uses' => 'Admin\CategoryController@store'));
+
+
+    Route::get('/category/{id}', array(
+        'as' => 'category.edit',
+        'uses' => 'Admin\CategoryController@edit'));
+
+    Route::post('/category/{id}', array(
+        'as' => 'category.update',
+        'uses' => 'Admin\CategoryController@update'));
+
+
+    Route::get('/category/delete/{id}', array(
+        'as' => 'category.delete',
+        'uses' => 'Admin\CategoryController@destroy'));
+
+
 
 
     ////////////////////////////////Emails Routes///////////////////////////////////
@@ -54,9 +70,29 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'as' => 'email.index',
         'uses' => 'Admin\EmailController@index'));
 
+
     Route::post('/emails/add', array(
         'as' => 'email.add',
         'uses' => 'Admin\EmailController@store'));
+
+
+    Route::get('/emails/{id}', array(
+        'as' => 'email.edit',
+        'uses' => 'Admin\EmailController@edit'));
+
+    Route::post('/emails/{id}', array(
+        'as' => 'email.update',
+        'uses' => 'Admin\EmailController@update'));
+
+
+
+    Route::get('/emails/delete/{id}', array(
+        'as' => 'email.delete',
+        'uses' => 'Admin\EmailController@destroy'));
+
+
+
+
 
 
 
