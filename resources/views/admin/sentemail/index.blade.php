@@ -6,12 +6,7 @@
 @stop
 
 @section('header_styles')
-    <link href="{{ asset('assets/vendors/jasny-bootstrap/css/jasny-bootstrap.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/vendors/validation/dist/css/bootstrapValidator.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/vendors/iCheck/skins/minimal/blue.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/vendors/select2/select2-bootstrap.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/css/custom_css/addnew_user.css') }}" rel="stylesheet">
+
 @stop
 @section('content')
     <div class="content-wrapper">
@@ -88,7 +83,8 @@
                                             <td>{{$email->category_id}}</td>
                                             <td>{{$email->email_address}}</td>
                                             <td>{{$email->subject}}</td>
-                                            <td><a target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{{substr($email->content, 0, 30)}}.....</a></td>
+                                            {{--<td><a style="font-size: 12px" target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{!!substr($email->content, 0, 30)!!}.....</a></td>--}}
+                                            <td><a  target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{{substr($email->content, 0, 30)}}.....</a></td>
                                             <td>{!! isset($email->created_at) ? @$email->created_at->diffForHumans() : 'Not Set'!!}</td>
                                             <td>
                                             </td>
@@ -109,21 +105,7 @@
                         <div class="box-footer no-padding">
                             <div class="mailbox-controls">
                                 <br/>
-                                {{--<!-- Check all button -->--}}
-                                {{--<button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>--}}
-                                {{--<div class="btn-group">--}}
-                                    {{--<button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>--}}
-                                    {{--<button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>--}}
-                                    {{--<button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>--}}
-                                {{--</div><!-- /.btn-group -->--}}
-                                {{--<button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>--}}
-                                {{--<div class="pull-right">--}}
-                                    {{--1-50/200--}}
-                                    {{--<div class="btn-group">--}}
-                                        {{--<button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>--}}
-                                        {{--<button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>--}}
-                                    {{--</div><!-- /.btn-group -->--}}
-                                {{--</div><!-- /.pull-right -->--}}
+
                             </div>
                         </div>
                     </div>
@@ -136,73 +118,6 @@
 @endsection
 
 @section('footer_scripts')
-
-    <script>
-        $(function () {
-            $(".select2").select2();
-
-            $("#roles").select2({
-                placeholder: 'Select Emails'
-            });
-
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-    </script>
-
-    <script>
-
-        $(function () {
-            //Enable iCheck plugin for checkboxes
-            //iCheck for checkbox and radio inputs
-            $('.mailbox-messages input[type="checkbox"]').iCheck({
-                checkboxClass: 'icheckbox_flat-blue',
-                radioClass: 'iradio_flat-blue'
-            });
-
-            //Enable check and uncheck all functionality
-            $(".checkbox-toggle").click(function () {
-                var clicks = $(this).data('clicks');
-                if (clicks) {
-                    //Uncheck all checkboxes
-                    $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-                    $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-                } else {
-                    //Check all checkboxes
-                    $(".mailbox-messages input[type='checkbox']").iCheck("check");
-                    $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-                }
-                $(this).data("clicks", !clicks);
-            });
-
-            //Handle starring for glyphicon and font awesome
-            $(".mailbox-star").click(function (e) {
-                e.preventDefault();
-                //detect type
-                var $this = $(this).find("a > i");
-                var glyph = $this.hasClass("glyphicon");
-                var fa = $this.hasClass("fa");
-
-                //Switch states
-                if (glyph) {
-                    $this.toggleClass("glyphicon-star");
-                    $this.toggleClass("glyphicon-star-empty");
-                }
-
-                if (fa) {
-                    $this.toggleClass("fa-star");
-                    $this.toggleClass("fa-star-o");
-                }
-            });
-        });
-
-    </script>
 
 @endsection
 

@@ -90,24 +90,5 @@
 
 @section('footer_scripts')
 
-    <script>
-        $(function () {
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-
-        });
-    </script>
-
 @endsection
 
