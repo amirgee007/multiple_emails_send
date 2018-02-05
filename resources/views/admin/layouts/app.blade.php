@@ -47,8 +47,8 @@
     <div class="wrapper">
 
     @if(Auth::user())
-            @include('admin.header.header');
-            @include('admin.sidebar.sidebar');
+            @include('admin.layouts.header');
+            @include('admin.layouts.sidebar');
 
             @yield('content')
 
@@ -57,7 +57,6 @@
                     <b>Version</b> 2.3.0
                 </div>
                 <strong>Copyright &copy; 2017-2018 <a href="https://web.facebook.com/amirgee007?_rdc=1&_rdr">M Amir Shahzad</a>.</strong> All rights reserved.
-
             </footer>
 
             <div class="control-sidebar-bg"></div>

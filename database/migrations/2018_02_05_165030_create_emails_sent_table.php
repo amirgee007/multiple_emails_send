@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSentEmailsTable extends Migration
+class CreateEmailsSentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,11 +16,15 @@ class CreateSentEmailsTable extends Migration
 
         Schema::create('sent_emails', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->string('email_address');
-            $table->string('subject')->nullable();;
-            $table->text('content')->nullable();
+            $table->integer('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->string('sent_to');
+            $table->string('sent_by');
+            $table->string('cc')->nullable();
+            $table->string('bcc')->nullable();
+            $table->string('subject')->nullable();
+            $table->longText('content')->nullable();
+
             $table->timestamps();
         });
 

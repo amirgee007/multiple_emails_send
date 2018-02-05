@@ -15,7 +15,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b style="color: wheat">Admin</b> LTE</a>
+        <a href="#"><b style="color: wheat">Admin</b> Emails</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -44,8 +44,8 @@
             </div>
         </form>
 
-        <a href="#">I forgot my password</a><br>
-        <a href="#" class="text-center">Register a new membership</a>
+        {{--<a href="#">I forgot my password</a><br>--}}
+        {{--<a href="#" class="text-center">Register a new membership</a>--}}
 
     </div>
 </div>

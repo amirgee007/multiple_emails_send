@@ -14,9 +14,10 @@
 Route::get('/admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', array(
+    'as' => 'home',
+    'uses' => 'AdminAuth\AuthController@showLoginForm'));
+
 
 Route::get('/admin', 'AdminAuth\AuthController@showLoginForm');
 Route::post('/admin', 'AdminAuth\AuthController@login');
@@ -39,28 +40,28 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'uses' => 'AdminAuth\AuthController@logout'));
 
 
-    ////////////////////////////////Category Routes///////////////////////////////////
-    Route::get('/category', array(
-        'as' => 'category.index',
-        'uses' => 'Admin\CategoryController@index'));
+    ////////////////////////////////Customer Routes///////////////////////////////////
+    Route::get('/customer', array(
+        'as' => 'customer.index',
+        'uses' => 'Admin\CustomerController@index'));
 
-    Route::post('/category/add', array(
-        'as' => 'category.add',
-        'uses' => 'Admin\CategoryController@store'));
-
-
-    Route::get('/category/{id}', array(
-        'as' => 'category.edit',
-        'uses' => 'Admin\CategoryController@edit'));
-
-    Route::post('/category/{id}', array(
-        'as' => 'category.update',
-        'uses' => 'Admin\CategoryController@update'));
+    Route::post('/customer/add', array(
+        'as' => 'customer.add',
+        'uses' => 'Admin\CustomerController@store'));
 
 
-    Route::get('/category/delete/{id}', array(
-        'as' => 'category.delete',
-        'uses' => 'Admin\CategoryController@destroy'));
+    Route::get('/customer/{id}', array(
+        'as' => 'customer.edit',
+        'uses' => 'Admin\CustomerController@edit'));
+
+    Route::post('/customer/{id}', array(
+        'as' => 'customer.update',
+        'uses' => 'Admin\CustomerController@update'));
+
+
+    Route::get('/customer/delete/{id}', array(
+        'as' => 'customer.delete',
+        'uses' => 'Admin\CustomerController@destroy'));
 
 
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateCustomerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,18 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function(Blueprint $table)
+        Schema::create('customers', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('title');
-            $table->integer('added_by')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->bigInteger('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('profile_pic')->nullable();
             $table->timestamps();
-            
-        });
 
+        });
     }
 
     /**
@@ -31,6 +34,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::drop('customers');
     }
 }

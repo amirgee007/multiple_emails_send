@@ -36,29 +36,16 @@
             </li>
 
 
-            <li class="treeview {{ (Request::is('admin/category') ? 'active' : '') }}">
+            <li class="treeview {{ (Request::is('admin/customer') ? 'active' : '') }}">
                 <a href="#">
-                    <i class="fa fa-edit"></i> <span>Category</span>
+                    <i class="fa fa-edit"></i> <span>Customers</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('category.index')}}"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
-                    <li><a href="{{route('category.index')}}"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
+                    <li><a href="{{route('customer.index')}}"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
+                    <li><a href="{{route('customer.index')}}"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
                 </ul>
             </li>
-
-            <li class="treeview {{ (Request::is('admin/emails') ? 'active' : '') }}">
-                <a href="#">
-                    <i class="fa fa-envelope"></i> <span>Emails</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('email.index')}}"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
-                    <li><a href="{{route('email.index')}}"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
-                </ul>
-            </li>
-
-
 
             <li class="treeview {{ (Request::is('admin/sendNew') ? 'active' : '') }}">
                 <a href="#">
@@ -71,7 +58,16 @@
                 </ul>
             </li>
 
-
+            <li class="treeview {{ (Request::is('admin/users') ? 'active' : '') }}">
+                <a href="#">
+                    <i class="fa fa-user"></i> <span>Users</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
+                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
+                </ul>
+            </li>
 
 
 
