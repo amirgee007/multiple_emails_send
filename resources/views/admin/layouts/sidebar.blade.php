@@ -47,7 +47,7 @@
                 </ul>
             </li>
 
-            <li class="treeview {{ (Request::is('admin/sendNew') ? 'active' : '') }}">
+            <li class="treeview {{ (Request::is('admin/send-new') ? 'active' : '') }}">
                 <a href="#">
                     <i class="fa fa-envelope"></i> <span>Send Emails</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -66,6 +66,17 @@
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
                     <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ (Request::is('admin/settings') ? 'active' : '') }}">
+                <a href="#">
+                    <i class="fa fa-cogs"></i> <span>Setting</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('log-viewer::dashboard')}}" target="new"><i class="fa fa-circle-o text-red"></i> Logs View </a></li>
+                    {{--<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>--}}
                 </ul>
             </li>
 

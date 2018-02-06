@@ -6,5 +6,3 @@
 
 
 </html>
-
-Send from noreply@something.com

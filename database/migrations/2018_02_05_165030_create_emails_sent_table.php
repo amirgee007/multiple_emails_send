@@ -18,12 +18,12 @@ class CreateEmailsSentTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->string('sent_to');
-            $table->string('sent_by');
+            $table->string('to')->nullable();
+            $table->string('from');
             $table->string('cc')->nullable();
             $table->string('bcc')->nullable();
             $table->string('subject')->nullable();
-            $table->longText('content')->nullable();
+            $table->longText('content');
 
             $table->timestamps();
         });

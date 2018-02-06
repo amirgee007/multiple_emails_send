@@ -1,4 +1,4 @@
-@extends('admin/layout')
+@extends('admin.layouts.app')
 
 @section('title')
     Login
@@ -22,13 +22,27 @@
         <form action="{{url('admin')}}" method="post" >
             {{csrf_field()}}
 
-            <div class="form-group has-feedback">
-                <input type="email" name="email" class="form-control" placeholder="Email" required>
+
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                @endif
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+
+
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} has-feedback">
+                <input id="password" type="password" class="form-control" placeholder="Password" name="password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                @endif
             </div>
             <div class="row">
                 <div class="col-xs-8">

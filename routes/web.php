@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-
 
 Route::get('/', array(
     'as' => 'home',
@@ -64,39 +62,6 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'uses' => 'Admin\CustomerController@destroy'));
 
 
-
-
-    ////////////////////////////////Emails Routes///////////////////////////////////
-    Route::get('/emails', array(
-        'as' => 'email.index',
-        'uses' => 'Admin\EmailController@index'));
-
-
-    Route::post('/emails/add', array(
-        'as' => 'email.add',
-        'uses' => 'Admin\EmailController@store'));
-
-
-    Route::get('/emails/{id}', array(
-        'as' => 'email.edit',
-        'uses' => 'Admin\EmailController@edit'));
-
-    Route::post('/emails/{id}', array(
-        'as' => 'email.update',
-        'uses' => 'Admin\EmailController@update'));
-
-
-
-    Route::get('/emails/delete/{id}', array(
-        'as' => 'email.delete',
-        'uses' => 'Admin\EmailController@destroy'));
-
-
-
-
-
-
-
     ////////////////////////////////Sent Emails Routes///////////////////////////////////
     Route::get('/sentemails', array(
         'as' => 'sentemail.index',
@@ -111,11 +76,12 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'uses' => 'Admin\SentEmailController@destroy'));
 
 
-    Route::get('/sendNew', array(
+    ////////////////Send Emails Now////////////////////////
+    Route::get('/send-new', array(
         'as' => 'sentemail.sendNew',
         'uses' => 'Admin\SentEmailController@create'));
 
-    Route::post('/sendNew/save', array(
+    Route::post('/send-new/save', array(
         'as' => 'sentemail.sendNew.save',
         'uses' => 'Admin\SentEmailController@store'));
 

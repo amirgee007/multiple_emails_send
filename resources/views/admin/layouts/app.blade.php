@@ -69,14 +69,12 @@
         {{--<script src="{{asset ('/public/plugins/datatableprintcsv/jquery.dataTables.min.js') }}"></script>--}}
         {{--<script src="{{ url('https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js') }}"></script>--}}
 
-
-        <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysiHtml5.all.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/dist/js/app.min.js"></script>
-
+        <script type="text/javascript" src="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysiHtml5.all.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('/dist/js/app.min.js') }}"></script>
 
         <script>
             $(document).ready(function () {
