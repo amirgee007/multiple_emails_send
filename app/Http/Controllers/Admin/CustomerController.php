@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        $customers =Customer::all();
-
+        $customers = Customer::paginate(15);
         return view('admin.customers.index', compact('customers'));
 
     }
@@ -21,10 +23,40 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
+        return view('admin.customers.create');
+    }
+
+    public function customersCsvUpload(Request $request)
+    {
+        try {
+
+            Storage::put('customers_bulk_file.csv',file_get_contents($request->file('file')->getRealPath()));
+
+            $count = 0;
+            $customers = Excel::load(storage_path('app/customers_bulk_file.csv'), function ($reader) {})->get()->toArray();
+
+                foreach ($customers as $customer) {
+                   $customer =  Customer::updateOrCreate(['email' => $customer['email']] ,$customer);
+                    $count++;
+                }
+
+                Log::info($count.' customer added in the database out of '.count($customers));
+
+
+            session()->flash('app_message', $count.' customers successfully added in the database out of '.count($customers));
+
+            return back();
+
+        } catch (\Exception $ex) {
+            session()->flash('error_error', $ex->getMessage());
+            return back();
+        }
 
     }
+
+
 
     /**
      * Store a newly created resource in storage.

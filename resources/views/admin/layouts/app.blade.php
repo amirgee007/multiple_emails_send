@@ -35,6 +35,9 @@
 
     {!! Html::style('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') !!}
 
+    <link href="{{ asset('assets/toastr/css/toastr.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/toastr/toastr.css') }}" rel="stylesheet"/>
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -75,6 +78,8 @@
         <script type="text/javascript" src="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysiHtml5.all.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('/dist/js/app.min.js') }}"></script>
+        <script src="{{ asset('assets/toastr/js/toastr.min.js') }}"></script>
+        <script src="{{ asset('assets/toastr/js/pages/ui-toastr.js') }}"></script>
 
         <script>
             $(document).ready(function () {
@@ -87,6 +92,42 @@
                     });
                 }, 4000);
             });
+
+
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "1000",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "swing",
+                "showMethod": "slideDown",
+                "hideMethod": "fadeOut"
+            };
+
+
+            @if (Session::has('app_info'))
+            toastr.info("{{ Session::get('app_info') }}", "Message");
+            @endif
+
+            @if (Session::has('app_message'))
+            toastr.success("{{ Session::get('app_message') }}", "Message");
+            @endif
+
+            @if (Session::has('app_warning'))
+            toastr.warning("{{ Session::get('app_warning') }}", "Message");
+            @endif
+
+            @if (Session::has('app_error'))
+            toastr.error("{{ Session::get('app_error') }}", "Message");
+            @endif
+
+
         </script>
 
         @yield('footer_scripts')

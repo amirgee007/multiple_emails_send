@@ -36,13 +36,13 @@
             </li>
 
 
-            <li class="treeview {{ (Request::is('admin/customer') ? 'active' : '') }}">
+            <li class="treeview {{ (Request::is('admin/customer') || Request::is('admin/customer/create')  ? 'active' : '') }}">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Customers</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('customer.index')}}"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
+                    <li><a href="{{route('customer.create')}}"><i class="fa fa-circle-o text-red"></i> Add New </a></li>
                     <li><a href="{{route('customer.index')}}"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
                 </ul>
             </li>

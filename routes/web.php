@@ -43,6 +43,14 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
         'as' => 'customer.index',
         'uses' => 'Admin\CustomerController@index'));
 
+    Route::get('/customer/create', array(
+        'as' => 'customer.create',
+        'uses' => 'Admin\CustomerController@create'));
+
+    Route::post('/customer-csv/upload', array(
+        'as' => 'customer.csv.upload',
+        'uses' => 'Admin\CustomerController@customersCsvUpload'));
+
     Route::post('/customer/add', array(
         'as' => 'customer.add',
         'uses' => 'Admin\CustomerController@store'));

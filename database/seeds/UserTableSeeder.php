@@ -18,18 +18,20 @@ class UserTableSeeder extends Seeder
         \DB::table('users')->insert(array (
             0 =>
                 array (
-                    'name' => 'hadi',
-                    'email' => 'hadi@gmail.com',
+                    'name' => 'admin',
+                    'email' => 'admin@admin.com',
                     'password' => bcrypt('123456'),
                 ),
             1 =>
                 array (
                     'name' =>'amir',
-                    'email' =>'amirgee007@yahoo.com',
+                    'email' =>'amir@yahoo.com',
                     'password' => bcrypt('123456'),
                 ),
         ));
 
+
+        echo 'email: admin@admin.com password: 123456 created';
 
     }
 }

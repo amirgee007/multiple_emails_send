@@ -19,52 +19,6 @@
         @include('admin.layouts.alert')
 
         <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Add New Customer</h3>
-                        </div>
-                        <form role="form" method="post" action="{{route('customer.add')}}">
-                            <div class="box-body">
-                                {{csrf_field()}}
-                                <div class="form-group">
-                                    <label for="tittle">First Name</label>
-                                    <input required type="text" class="form-control" id="tittle" name="first_name" placeholder="Enter First Name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tittle">Last Name</label>
-                                    <input required type="text" class="form-control" id="tittle" name="last_name" placeholder="Enter Last Name">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="tittle">Email</label>
-                                    <input required type="email" class="form-control" id="tittle" name="email" placeholder="Enter Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tittle">Phone</label>
-                                    <input type="number" class="form-control" id="tittle" name="phone" placeholder="Enter Phone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="tittle">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Add New Customer</button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-        </section>
-
-        <section class="content">
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">All Customers</h3>
@@ -101,6 +55,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="pull-right box-body"> {{ $customers->links() }}</div>
                 </div>
             </div>
         </section>
