@@ -21,8 +21,7 @@ class SentEmailController extends Controller
     public function index()
     {
 
-        $sentEmails =SentEmail::all();
-
+        $sentEmails =SentEmail::paginate(15);
         return view('admin.sentemail.index', compact('sentEmails' ));
     }
 
@@ -46,15 +45,18 @@ class SentEmailController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->selection='selected')
+            $customers = Customer::whereIn('id' ,$request->customer_ids)->get();
+        else
+            $customers = Customer::Active()->get();
 
-        $customers = Customer::whereIn('id' ,$request->customer_ids)->get();
         $success = 0;
-        $data = $request->except('_token','_wysihtml5_mode','customer_ids');
+        $data = $request->except('_token','_wysihtml5_mode','customer_ids' ,'selection');
         foreach ($customers as $customer){
             $isSendEmail = $this->sendEmailToCustomer($data ,$customer->email);
              if($isSendEmail){
-                 dd($data);
-                 SentEmail::create($request->except('_token','_wysihtml5_mode'));
+                 $data['sent_to'] = $customer->id;
+                 SentEmail::create($data);
                  $success++;
              }
 
@@ -77,24 +79,22 @@ class SentEmailController extends Controller
     {
 
         $subject = $data['subject'];
-        $from = $data['from'];
         $cc = $data['cc'];
         $content = $data['content'];
-        $attach = $data['attachments'];
+        $attach = isset($data['attachments']) ? $data['attachments'] : null;
 
 
         //todo: make queue for large number of emails
         Mail::send('admin.send', ['subject' => $subject, 'content' => $content],
             function ($message )
 
-        use ($attach , $subject , $to, $from ,$cc){
-            $message->from($from, 'Admin');
+        use ($attach , $subject , $to ,$cc){
+            $message->from('admin@admin.com', 'Admin');
             $message->to($to);
             $message->cc($cc);
             $message->subject($subject);
 
             if ($attach) {
-
                 $message->attach($attach->getRealPath(), array(
                         'as' => 'resume.' . $attach->getClientOriginalExtension(),
                         'mime' => $attach->getMimeType())
@@ -147,10 +147,10 @@ class SentEmailController extends Controller
      */
     public function destroy($id)
     {
-        dd($id , 'id delete');
-        //go back to show all page
+       SentEmail::where('id' ,$id)->delete();
+        session()->flash('app_message', ' Sent Email deleted successfully');
 
-        return redirect()->route('sentemail.index');
+       return redirect()->route('sentemail.index');
 
     }
 }

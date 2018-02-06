@@ -1,7 +1,7 @@
-@extends('admin/layout')
+@extends('admin.layouts.app')
 
 @section('title')
-    All Emails
+    All Sent Emails
     @parent
 @stop
 
@@ -25,29 +25,9 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
-                    <a href="{{route('sentemail.sendNew')}}" class="btn btn-primary btn-block margin-bottom">Compose New</a>
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Folders</h3>
-                            <div class="box-tools">
-                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox <span class="label label-primary pull-right"></span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right"></span></a></li>
-                                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="box box-primary">
+                        <a href="{{route('sentemail.sendNew')}}" class="btn btn-primary btn-block margin-bottom">Compose New</a>
                         <div class="box-header with-border">
                             <h3 class="box-title">All Emails</h3>
                             <div class="box-tools pull-right">
@@ -66,8 +46,8 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Category</th>
-                                        <th>Send To</th>
+                                        <th>To</th>
+                                        <th>CC</th>
                                         <th>Subject</th>
                                         <th>Contents</th>
                                         <th>Send At</th>
@@ -80,8 +60,8 @@
                                     @foreach(($sentEmails) as $email)
                                         <tr>
                                             <td><a target="_blank" href="{{route('sentemail.show' ,$email->id)}}"><i class="fa fa-star text-yellow"></i>{{$email->id}}</a></td>
-                                            <td>{{$email->category_id}}</td>
-                                            <td>{{$email->email_address}}</td>
+                                            <td>{{$email->sent_to}}</td>
+                                            <td>{{$email->cc}}</td>
                                             <td>{{$email->subject}}</td>
                                             {{--<td><a style="font-size: 12px" target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{!!substr($email->content, 0, 30)!!}.....</a></td>--}}
                                             <td><a  target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{{substr($email->content, 0, 30)}}.....</a></td>
@@ -93,6 +73,7 @@
 
                                     </tbody>
                                 </table>
+                                <div class="pull-right box-body"> {{ $sentEmails->links() }}</div>
                             </div>
                         </div>
 

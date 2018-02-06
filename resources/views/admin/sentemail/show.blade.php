@@ -1,4 +1,4 @@
-@extends('admin/layout')
+@extends('admin.layouts.app')
 
 @section('title')
     Send Email
@@ -31,12 +31,11 @@
                         </div>
                         <div class="box-body no-padding">
                             <div class="mailbox-read-info">
-                                <h3>Subject: {{$sentEmail->subject}}</h3>
-                                <h5>From:  {{$sentEmail->email_address}} <span class="mailbox-read-time pull-right">{!! isset($sentEmail->created_at) ? @$sentEmail->created_at->toDayDateTimeString() : 'Not Set'!!}</span></h5>
+                                <h4>Subject: {{$sentEmail->subject}}</h4>
+                                <h5>To:  {{$sentEmail->send_to}} <span class="mailbox-read-time pull-right">{!! isset($sentEmail->created_at) ? @$sentEmail->created_at->toDayDateTimeString() : 'Not Set'!!}</span></h5>
                             </div>
                             <div class="mailbox-controls with-border text-center">
-                                <div class="btn-group"></div>
-
+                                <div class="btn-group">Email Contents</div>
                             </div>
                             <div class="mailbox-read-message">
                                 {!! $sentEmail->content!!}
@@ -49,7 +48,7 @@
                                 <a class="btn btn-default" href="{{route('sentemail.index')}}"><i class="fa fa-reply"></i> Go Back</a>
                                 <a class="btn btn-default" href="{{route('sentemail.index')}}"><i class="fa fa-share"></i> Go Forward</a>
                             </div>
-                            <a class="btn btn-default" href="{{route('sentemail.delete' , $sentEmail->id)}}"><i class="fa fa-trash-o"></i> Delete</a>
+                            <a class="btn btn-default" onclick="return confirm('Are you sure to delete ?')" href="{{route('sentemail.delete' , $sentEmail->id)}}"><i class="fa fa-trash-o"></i> Delete</a>
                         </div>
                     </div>
                 </div>

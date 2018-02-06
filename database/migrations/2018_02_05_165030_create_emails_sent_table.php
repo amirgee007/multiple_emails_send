@@ -15,11 +15,11 @@ class CreateEmailsSentTable extends Migration
     {
 
         Schema::create('sent_emails', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('customer_id')->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->string('to')->nullable();
-            $table->string('from');
+            $table->integer('sent_to')->unsigned()->nullable();
+            $table->foreign('sent_to')->references('id')->on('customers')->onDelete('cascade');
+//            $table->string('send_email')->nullable();
             $table->string('cc')->nullable();
             $table->string('bcc')->nullable();
             $table->string('subject')->nullable();

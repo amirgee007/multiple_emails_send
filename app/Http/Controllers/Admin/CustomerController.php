@@ -128,9 +128,9 @@ class CustomerController extends Controller
     public function destroy($id)
     {
 
-        Category::where('id' , $id) ->delete();
-        session()->flash('alert-info', 'Category has been Successfully deleted!');
+        Customer::where('id' , $id) ->delete();
+        session()->flash('alert-info', 'Customer has been Successfully deleted!');
 
-        return redirect()->route('category.index');
+        return back();
     }
 }

@@ -15,13 +15,15 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customers', function(Blueprint $table)
         {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email',100)->unique();
             $table->bigInteger('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('profile_pic')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
 
         });

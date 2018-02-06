@@ -36,21 +36,18 @@
                             {{csrf_field()}}
                             <div class="box-body">
 
-                                <div class="form-group">
-                                    <label for="from">To All Or Particular</label>
-                                    <input type="email" class="form-control" name="from" placeholder="From" required>
-                                </div>
                             <div class="form-group">
-                                <label for="customer_id">To</label>
-                                <select id="customer_id" name="customer_ids[]" required class="form-control select2" multiple="multiple" data-placeholder="Select a Customer" style="width: 100%;">
+                                <label class="radio-inline" style=""><input type="radio" required name="selection" value="selected" checked>To Selected Customer</label>
+                                <label class="radio-inline" style=""><input type="radio" required name="selection" value="all" >To All Customers</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customer_ids">To</label>
+                                <select id="customer_ids" name="customer_ids[]" required class="form-control select2" multiple="multiple" data-placeholder="Select a Customer" style="width: 100%;">
                                     @foreach($customers as $customer)
                                         <option value="{{ $customer->id }}" >{{ $customer->first_name.' '.$customer->last_name}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="from">From</label>
-                                <input type="email" class="form-control" name="from" placeholder="From" required>
                             </div>
                             <div class="form-group">
                                 <label for="tittle">Subject</label>
@@ -65,10 +62,9 @@
                             <div class="form-group">
                                 <label for="tittle">Message</label>
                                 <textarea id="compose-textarea" name="content" class="form-control" style="height: 300px">
-                                    <h3> Email here.....</h3>
+
                                 </textarea>
                             </div>
-
 
                             <div class="form-group">
                                 <div class="btn btn-default btn-file">
@@ -77,7 +73,6 @@
                                 </div>
                                 <p class="help-block">Max. 32MB</p>
                             </div>
-
 
                         </div>
                             <div class="box-footer">
@@ -101,7 +96,23 @@
     <script>
 
         $(function () {
-            $(".select2").select2();
+
+            $('input[type=radio][name=selection]').change(function() {
+                if (this.value == 'selected') {
+                    $('#customer_ids').prop('required',true);
+                    $('#customer_ids').prop('disabled',false);
+                }
+                else if (this.value == 'all') {
+                    $(".select2").select2("val", "");
+                    $('#customer_ids').prop('required',false);
+                    $('#customer_ids').prop('disabled',true);
+                }
+            });
+
+            $(".select2").select2({
+                placeholder: "Select a customer"
+            });
+
         });
     </script>
 @endsection

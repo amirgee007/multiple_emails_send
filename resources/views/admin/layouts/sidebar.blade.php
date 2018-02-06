@@ -36,7 +36,7 @@
             </li>
 
 
-            <li class="treeview {{ (Request::is('admin/customer') || Request::is('admin/customer/create')  ? 'active' : '') }}">
+            <li class="treeview {{ Request::is('admin/customer') || Request::is('admin/customer/create') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Customers</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -47,7 +47,7 @@
                 </ul>
             </li>
 
-            <li class="treeview {{ (Request::is('admin/send-new') ? 'active' : '') }}">
+            <li class="treeview {{ Request::is('admin/send-new') || Request::is('admin/sentemails' ) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-envelope"></i> <span>Send Emails</span>
                     <i class="fa fa-angle-left pull-right"></i>
