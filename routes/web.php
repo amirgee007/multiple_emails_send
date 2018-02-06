@@ -16,6 +16,11 @@ Route::get('/', array(
     'as' => 'home',
     'uses' => 'AdminAuth\AuthController@showLoginForm'));
 
+Route::get('/unsub' ,function (){
+
+    return view('unsubscribe');
+});
+
 
 Route::get('/admin', 'AdminAuth\AuthController@showLoginForm');
 Route::post('/admin', 'AdminAuth\AuthController@login');
