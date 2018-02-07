@@ -45,7 +45,7 @@ class SentEmailController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->selection='selected')
+        if($request->selection=='selected')
             $customers = Customer::whereIn('id' ,$request->customer_ids)->get();
         else
             $customers = Customer::Active()->get();
