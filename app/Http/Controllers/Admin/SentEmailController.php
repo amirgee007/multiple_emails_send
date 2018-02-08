@@ -32,6 +32,7 @@ class SentEmailController extends Controller
      */
     public function create()
     {
+        return view('admin.tempelates.email_tempelate1');
         $customers =Customer::all();
         return view('admin.sentemail.create', compact('customers'));
 

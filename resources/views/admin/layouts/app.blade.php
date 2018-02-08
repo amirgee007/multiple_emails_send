@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
         @section('title')
-            | Dashboard
+            | Emails Msaeed
         @show
     </title>
 
