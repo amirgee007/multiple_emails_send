@@ -66,6 +66,7 @@
 
                             <div class="form-group">
                                 <label for="tittle">Message</label>
+                                <textarea id="ckeditor_full_summernote" name="content" rows="6">{!! $html !!}</textarea>
                             </div>
 
                             {{--<div class="form-group">--}}

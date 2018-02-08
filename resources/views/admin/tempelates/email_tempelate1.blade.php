@@ -870,6 +870,7 @@
                                                                 *saeed@admin.com*<br>
                                                                 <br>
                                                                 Want to change how you receive these emails?<br>
+                                                                You can unsubscribe from this list by <a href="{{route('email.unsubscribe')}}">here</a>.<br>
                                                                 &nbsp;
                                                             </td>
                                                         </tr>
