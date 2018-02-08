@@ -16,10 +16,14 @@ Route::get('/', array(
     'as' => 'home',
     'uses' => 'AdminAuth\AuthController@showLoginForm'));
 
-Route::get('/unsub' ,function (){
+Route::get('/unsubscribe' ,function (){
+    return view('admin.tempelates.unsubscribe');
+})->name('email.unsubscribe');
 
-    return view('unsubscribe');
-});
+
+Route::post('/unsubscribe/save', array(
+    'as' => 'unsubscribe.save',
+    'uses' => 'HomeController@unsubscribeSave'));
 
 
 Route::get('/admin', 'AdminAuth\AuthController@showLoginForm');

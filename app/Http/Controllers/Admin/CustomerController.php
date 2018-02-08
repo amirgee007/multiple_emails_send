@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Models\Customer;
+use App\MSaeed\Helper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -38,8 +40,12 @@ class CustomerController extends Controller
             $customers = Excel::load(storage_path('app/customers_bulk_file.csv'), function ($reader) {})->get()->toArray();
 
                 foreach ($customers as $customer) {
+
                    $customer =  Customer::updateOrCreate(['email' => $customer['email']] ,$customer);
-                    $count++;
+                   if(is_null($customer->unique_url))
+                   $customer->update($request->except('_token'));
+
+                   $count++;
                 }
 
                 Log::info($count.' customer added in the database out of '.count($customers));
@@ -66,9 +72,9 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-
         try{
-            Customer::updateOrCreate(['email' => $request->email] ,$request->except('_token'));
+            $customer = Customer::updateOrCreate(['email' => $request->email] ,$request->except('_token'));
+            $customer->update(['unique_url' => Helper::encrypt($customer->id)]);
             session()->flash('alert-success', 'Customer has been Successfully Created!');
 
         } catch (\Exception $ex) {

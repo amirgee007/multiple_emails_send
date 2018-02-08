@@ -1,62 +1,185 @@
-@extends('layouts.minimal')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('title')
-    Sock Feedback
-    @parent
-@stop
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <style type="text/css">
+        /* Space out content a bit */
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        form {
+            margin-bottom: 18px;
+        }
+        /* Custom page header */
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            margin: 10px 0;
+        }
+        .required-fields {
+            text-align: right;
+        }
+        .required-fields span {
+            color: #a94442;
+            font-weight: bold;
+        }
+        .list-group-item label {
+            font-weight: normal;
+            margin-top: 17px;
+        }
+        .list-group-item label input[type="checkbox"] {
+            margin-right: 4px;
+        }
+        .form-group span.required {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 20px;
+            color: #a94442;
+            font-weight: bold;
+            user-select: none;
+        }
+        label.error {
+            color: #a94442;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        .form-actions {
+            margin: 25px 0;
+        }
+        .form-control + .form-control {
+            margin-top: 6px;
+        }
+        .panel-group .panel-title .closed-icon,
+        .panel-group .panel-title .open-icon {
+            margin-right: 0.5em;
+            top: 2px;
+        }
+        .panel-group .panel-title a:hover,
+        .panel-group .panel-title a:active {
+            text-decoration: none;
+        }
+        .panel-group .panel-title a:hover .text,
+        .panel-group .panel-title a:active .text {
+            text-decoration: underline;
+        }
+        .panel-group .panel-title .closed-icon { display: none; }
+        .panel-group.closed .panel-title .open-icon { display: none; }
+        .panel-group.closed .panel-title .closed-icon { display: inline; }
+        /* Custom page footer */
+        .footer {
+            padding-top: 18px;
+            border-top: 1px solid #e5e5e5;
+        }
+        /* Customize container */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 730px;
+            }
+        }
 
-@section('header_styles')
+    </style>
 
-@stop
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
 
-@section('content')
-    <div id="header" class="section-4">
-        <div class="container-11 w-container">
-            <img src="{{asset('assets/feedback/images/logo-tall.png')}}" class="image-23">
-            <h1 class="heading-24">We're unsubscribing you!</h1>
+<div class="container">
+    <div class="header">
+        <img  width="100%" src="http://blog.seh-hotels.com/wp-content/uploads/2016/04/week-end-nature-1.jpg" />
+        <h1>We're unsubscribing you!</h1>
+    </div>
+
+    <form action="{{route('unsubscribe.save')}}" method="POST" role="form" class="form-horizontal">
+        {{csrf_field()}}
+
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+            @endforeach
         </div>
-    </div>
-
-    <div class="container-12 w-container">
-
-            <div id="hide" class="item-review-holder" >
-                <input data-id="{{$url}}" type="button" id="unsub-button" value="Click Here to Un Subscribe" data-wait="Submitting review..." class="submit-button w-button socksku_feedback_button">
+        <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email Address</label>
+            <div class="col-sm-9">
+                <input required autofocus type="email" class="form-control" id="email" name="email" value="" />
             </div>
+        </div>
 
-            <div id="show" class="item-review-holder" style="display: none">
-                <h4>You have successfully unsubscribed from e-mails about member benefits.!</h4>
-                <h5>We’re sorry that you no longer wish to receive these e-mails but we understand..!<br></h5>
+        </br>
+        <div class="form-group">
+            <label for="interests" class="col-sm-3 control-label">Reasons</label>
+            <div class="col-sm-9">
+
+                <div class="radio">
+                    <label>
+                        <input checked type="radio" name="unsub_reason" value="Emails are inappropriate" />
+                        Emails are inappropriate
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="unsub_reason" value="Spam emails" />
+                        Spam emails
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="unsub_reason" value="I don't like these" />
+                        I don't like these
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="unsub_reason" value=" Too many emails"/>
+                        Too many emails
+                    </label>
+                </div>
             </div>
-    </div>
+        </div>
 
-@stop
 
-@section('footer_scripts')
+        <div class="clearfix form-actions">
+            <div class="pull-right">
+                <button type="submit" class="btn btn-default btn-danger">Unsubscribe me</button>
+            </div>
+        </div>
+    </form>
 
-    <script>
-    $("#unsub-button").click(function(e){
+    <footer class="footer">
+        <p>
+            &copy; 2018 @All rights reserved &mdash; <a href="#" target="_blank">emails.msaeed</a>
+        </p>
+    </footer>
 
-        var url = ($(this).attr('data-id'));
+</div> <!-- /container -->
 
-        $.ajax({
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
 
-            url: "{{route('post.customer.unsubscribe')}}",
-            data: {'url': url },
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            success: function(data) {
-                if(data.status)
-                {
-                    $('#show').css('display','block');
-                    $('#hide').css('display','none');
-                    toastr.success('Your have successfully unSubscribed from our Emailing System.','Message');
-                }
-                else
-                    toastr.error('Something went wrong please try again later','Message');
-            },
-            type: 'POST'
-        });
+<script>
 
-    });
+
+
 </script>
-@stop
+
+</body>
+</html>

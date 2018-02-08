@@ -7,13 +7,18 @@
 
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/select2/select2.min.css') }}"/>
+    <link href="{{ asset('/assets/summernote/summernote.css') }}" rel="stylesheet"  type="text/css"/>
+    {{--<link href="{{ asset('/css/refresh-btn.css') }}" rel="stylesheet"  type="text/css"/>--}}
+    <link href="{{ asset('/assets/summernote/font/summernote.ttf') }}" rel="stylesheet"  type="text/css"/>
+    <link href="{{ asset('/assets/summernote/font/summernote.woff') }}" rel="stylesheet"  type="text/css"/>
+
 @stop
 
 
 @section('content')
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>
+            <h1 style="float: left">
                 Email
                 <small>Send Email</small>
             </h1>
@@ -61,18 +66,15 @@
 
                             <div class="form-group">
                                 <label for="tittle">Message</label>
-                                <textarea id="compose-textarea" name="content" class="form-control" style="height: 300px">
-
-                                </textarea>
                             </div>
 
-                            <div class="form-group">
-                                <div class="btn btn-default btn-file">
-                                    <i class="fa fa-paperclip"></i> Add Attachment in an Email
-                                    <input type="file" name="attachments">
-                                </div>
-                                <p class="help-block">Max. 32MB</p>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<div class="btn btn-default btn-file">--}}
+                                    {{--<i class="fa fa-paperclip"></i> Add Attachment in an Email--}}
+                                    {{--<input type="file" name="attachments">--}}
+                                {{--</div>--}}
+                                {{--<p class="help-block">Max. 32MB</p>--}}
+                            {{--</div>--}}
 
                         </div>
                             <div class="box-footer">
@@ -90,12 +92,18 @@
 @endsection
 
 @section('footer_scripts')
-    <script type="text/javascript" src="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script  src="{{ asset('assets/summernote/summernote.js') }}"  type="text/javascript"></script>
+
+    {{--<script type="text/javascript" src="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/plugins/select2/select2.full.min.js') }}"></script>
 
     <script>
 
         $(function () {
+
+            $('#ckeditor_full_summernote').summernote({
+                height: 500
+            });
 
             $('input[type=radio][name=selection]').change(function() {
                 if (this.value == 'selected') {

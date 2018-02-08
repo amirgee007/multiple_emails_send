@@ -4,5 +4,4 @@
 {!! $content!!}
 </body>
 
-
 </html>

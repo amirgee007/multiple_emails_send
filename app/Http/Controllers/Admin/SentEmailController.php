@@ -32,9 +32,9 @@ class SentEmailController extends Controller
      */
     public function create()
     {
-        return view('admin.tempelates.email_tempelate1');
+        $html = view('admin.tempelates.email_tempelate1')->render();
         $customers =Customer::all();
-        return view('admin.sentemail.create', compact('customers'));
+        return view('admin.sentemail.create', compact('customers','html'));
 
     }
 
@@ -46,6 +46,7 @@ class SentEmailController extends Controller
      */
     public function store(Request $request)
     {
+
         if($request->selection=='selected')
             $customers = Customer::whereIn('id' ,$request->customer_ids)->get();
         else
