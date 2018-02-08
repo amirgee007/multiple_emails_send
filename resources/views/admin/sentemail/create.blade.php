@@ -95,7 +95,6 @@
 @section('footer_scripts')
     <script  src="{{ asset('assets/summernote/summernote.js') }}"  type="text/javascript"></script>
 
-    {{--<script type="text/javascript" src="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/plugins/select2/select2.full.min.js') }}"></script>
 
     <script>
