@@ -32,6 +32,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Address</th>
+                            <th>Active</th>
                             <th>Created At</th>
                             <th>Action</th>
                         </tr>
@@ -44,6 +45,7 @@
                             <td>{{$customer->email}}</td>
                             <td>{{$customer->phone}}</td>
                             <td>{{$customer->address}}</td>
+                            <td>{{$customer->is_active}}</td>
                             <td>{!! isset($customer->created_at) ? @$customer->created_at->diffForHumans() : 'n/a'!!}</td>
                             <td>
                                 <a href="{{route('customer.edit' , $customer->id)}}"><i class="fa fa-fw fa-pencil text-warning"></i></a>

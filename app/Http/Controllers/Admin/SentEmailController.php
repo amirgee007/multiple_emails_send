@@ -33,7 +33,7 @@ class SentEmailController extends Controller
     public function create()
     {
         $html = view('admin.tempelates.email_tempelate1')->render();
-        $customers =Customer::all();
+        $customers = Customer::Active()->get();
         return view('admin.sentemail.create', compact('customers','html'));
 
     }
