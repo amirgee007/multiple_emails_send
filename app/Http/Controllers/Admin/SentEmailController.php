@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Email;
+use App\Jobs\SendCustomerEmail;
 use App\Models\Customer;
 use App\Models\SentEmail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -46,74 +48,13 @@ class SentEmailController extends Controller
      */
     public function store(Request $request)
     {
+        $job = (new SendCustomerEmail($request->all()))->delay(Carbon::now()->addSeconds(5));
 
-        if($request->selection=='selected')
-            $customers = Customer::whereIn('id' ,$request->customer_ids)->get();
-        else
-            $customers = Customer::Active()->get();
-
-        $success = 0;
-        $data = $request->except('_token','_wysihtml5_mode','customer_ids' ,'selection');
-        foreach ($customers as $customer){
-            $isSendEmail = $this->sendEmailToCustomer($data ,$customer->email);
-             if($isSendEmail){
-                 $data['sent_to'] = $customer->id;
-                 SentEmail::create($data);
-                 $success++;
-             }
-
-             else
-                 continue;
-        }
-
-        session()->flash('alert-success', $success. 'Emails has been Successfully send and stored!');
+        dispatch($job);
+        session()->flash('app_message', ' Job has been Dispatched in the queue to send Emails');
         return redirect()->route('sentemail.index');
 
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\SentEmail  $sentEmail
-     * @return \Illuminate\Http\Response
-     */
-    public function sendEmailToCustomer($data ,$to)
-    {
-
-        $subject = $data['subject'];
-        $cc = $data['cc'];
-        $content = $data['content'];
-        $attach = isset($data['attachments']) ? $data['attachments'] : null;
-
-
-        //todo: make queue for large number of emails
-        Mail::send('admin.send', ['subject' => $subject, 'content' => $content],
-            function ($message )
-
-        use ($attach , $subject , $to ,$cc){
-            $message->from('admin@admin.com', 'Admin');
-            $message->to($to);
-            $message->cc($cc);
-            $message->subject($subject);
-
-            if ($attach) {
-                $message->attach($attach->getRealPath(), array(
-                        'as' => 'resume.' . $attach->getClientOriginalExtension(),
-                        'mime' => $attach->getMimeType())
-                );
-            }
-
-        });
-
-        if (Mail::failures()) {
-            return false;
-        }
-
-        return true;
-
-    }
-
-
 
     /**
      * Display the specified resource.

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Jobs\AddCustomerCsv;
 use App\Models\Customer;
 use App\MSaeed\Helper;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -35,23 +37,10 @@ class CustomerController extends Controller
         try {
 
             Storage::put('customers_bulk_file.csv',file_get_contents($request->file('file')->getRealPath()));
+            $job = (new AddCustomerCsv())->delay(Carbon::now()->addSeconds(1));
 
-            $count = 0;
-            $customers = Excel::load(storage_path('app/customers_bulk_file.csv'), function ($reader) {})->get()->toArray();
-
-                foreach ($customers as $customer) {
-
-                   $customer =  Customer::updateOrCreate(['email' => $customer['email']] ,$customer);
-                   if(is_null($customer->unique_url))
-                   $customer->update($request->except('_token'));
-
-                   $count++;
-                }
-
-                Log::info($count.' customer added in the database out of '.count($customers));
-
-
-            session()->flash('app_message', $count.' customers successfully added in the database out of '.count($customers));
+            dispatch($job);
+            session()->flash('app_message', 'File has been upload and job will start shortly');
 
             return back();
 
