@@ -18,6 +18,7 @@ class SendCustomerEmail implements ShouldQueue
 
     public $timeout = 2000;
     public $request;
+    public $CC='amirgee007@yahoo.com';
 
 
     /**
@@ -37,6 +38,7 @@ class SendCustomerEmail implements ShouldQueue
      */
     public function handle()
     {
+
         if($this->request['selection']=='selected')
             $customers = Customer::whereIn('id' ,$this->request['customer_ids'])->get();
         else
@@ -47,9 +49,13 @@ class SendCustomerEmail implements ShouldQueue
             $isSendEmail = $this->sendEmailToCustomer($this->request ,$customer->email);
             if($isSendEmail){
                 $data['sent_to'] = $customer->id;
-                $data['cc'] = $this->request['cc'];
                 $data['subject'] = $this->request['subject'];
-                $data['content'] = $this->request['content'];
+                $data['title'] = $this->request['title'];
+                $data['description'] = $this->request['description'];
+                $data['end_text'] = $this->request['end_text'];
+                $data['picture_url'] = $this->request['picture_url'];
+                $data['cc'] = $this->CC;
+
                 SentEmail::create($data);
                 $success++;
             }
@@ -67,28 +73,21 @@ class SendCustomerEmail implements ShouldQueue
     {
 
         $subject = $data['subject'];
-        $cc = $data['cc'];
-        $content = $data['content'];
-        $attach = isset($data['attachments']) ? $data['attachments'] : null;
+        $title = $data['title'];
+        $description = $data['description'];
+        $end_text = $data['end_text'];
+        $image = $data['picture_url'];
+        $cc = $this->CC;
 
+        $view = 'admin.tempelates.email_tempelate1';
 
-        //todo: make queue for large number of emails
-        Mail::send('admin.send', ['subject' => $subject, 'content' => $content],
-            function ($message )
+        Mail::send($view, compact('title','image','end_text','description'),
 
-            use ($attach , $subject , $to ,$cc){
+            function ($message )use ( $subject , $to ,$cc){
                 $message->from('admin@admin.com', 'Admin');
                 $message->to($to);
                 $message->cc($cc);
                 $message->subject($subject);
-
-                if ($attach) {
-                    $message->attach($attach->getRealPath(), array(
-                            'as' => 'resume.' . $attach->getClientOriginalExtension(),
-                            'mime' => $attach->getMimeType())
-                    );
-                }
-
             });
 
         if (Mail::failures()) {

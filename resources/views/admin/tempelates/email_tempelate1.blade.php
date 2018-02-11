@@ -491,21 +491,8 @@
                             <![endif]-->
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
                                 <tr>
-                                    <td valign="top" class="headerContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
-                                            <tbody class="mcnImageBlockOuter">
-                                            <tr>
-                                                <td valign="top" style="padding:9px" class="mcnImageBlockInner">
-                                                    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
-                                                        <tbody><tr>
-                                                            <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
-                                                                <img align="center" alt="" src="https://logos.textgiraffe.com/logos/logo-name/Saeed-designstyle-boots-m.png" width="196" style="max-width:196px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
-                                                            </td>
-                                                        </tr>
-                                                        </tbody></table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                    <td valign="top" class="headerContainer">
+
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
                                             <tbody class="mcnTextBlockOuter">
                                             <tr>
@@ -523,7 +510,7 @@
 
                                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
 
-                                                                <h1>emails.msaeed.de</h1>
+                                                                <h1>{{$title}}</h1>
                                                             </td>
                                                         </tr>
                                                         </tbody></table>
@@ -577,11 +564,11 @@
                                                         <tbody><tr>
 
                                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
-
-                                                                <h3>Feature the star of your collection first.</h3><p>To get started, replace the image above with a striking product photo to catch people's attention.</p><p>Then, describe what makes your product unique, useful, or gift-worthy. Be sure to highlight the main features, and let people know where it's available.</p>
+                                                                <p>{{$description}}</p>
                                                             </td>
                                                         </tr>
-                                                        </tbody></table>
+                                                        </tbody>
+                                                    </table>
                                                     <!--[if mso]>
                                                     </td>
                                                     <![endif]-->
@@ -599,16 +586,19 @@
                                             <tr>
                                                 <td valign="top" style="padding:9px" class="mcnImageBlockInner">
                                                     <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
-                                                        <tbody><tr>
+                                                        <tbody>
+                                                        <tr>
                                                             <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
-                                                                <img align="center" alt="" src="http://blog.seh-hotels.com/wp-content/uploads/2016/04/week-end-nature-1.jpg" width="564" style="max-width:564px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
+                                                                <img align="center" alt="Image not load" src="{{$image}}" width="600" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
                                                             </td>
                                                         </tr>
-                                                        </tbody></table>
+                                                        </tbody>
+                                                    </table>
                                                 </td>
                                             </tr>
                                             </tbody>
-                                        </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+                                        </table>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
                                             <tbody class="mcnTextBlockOuter">
                                             <tr>
                                                 <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
@@ -625,12 +615,7 @@
 
                                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
 
-                                                                <h3>Feature the star of your collection first.</h3>
-
-                                                                <p>To get started, replace the image above with a striking product photo to catch people's attention.</p>
-
-                                                                <p>Then, describe what makes your product unique, useful, or gift-worthy. Be sure to highlight the main features, and let people know where it's available.</p>
-
+                                                                <p>{{$end_text}}</p>
                                                             </td>
                                                         </tr>
                                                         </tbody></table>

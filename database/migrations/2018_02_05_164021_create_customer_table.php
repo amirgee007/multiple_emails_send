@@ -22,7 +22,6 @@ class CreateCustomerTable extends Migration
             $table->string('email',100)->unique();
             $table->bigInteger('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('unique_url')->nullable();
             $table->boolean('is_active')->default(1);
             $table->string('unsub_reason')->nullable();
             $table->timestamps();

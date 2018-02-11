@@ -32,13 +32,13 @@
                         <div class="box-body no-padding">
                             <div class="mailbox-read-info">
                                 <h4>Subject: {{$sentEmail->subject}}</h4>
-                                <h5>To:  {{$sentEmail->send_to}} <span class="mailbox-read-time pull-right">{!! isset($sentEmail->created_at) ? @$sentEmail->created_at->toDayDateTimeString() : 'Not Set'!!}</span></h5>
+                                <h5>To:  {{$sentEmail->customer->email}} <span class="mailbox-read-time pull-right">{!! isset($sentEmail->created_at) ? @$sentEmail->created_at->toDayDateTimeString() : 'Not Set'!!}</span></h5>
                             </div>
                             <div class="mailbox-controls with-border text-center">
-                                <div class="btn-group">Email Contents</div>
+                                <div class="btn-group">Contents</div>
                             </div>
                             <div class="mailbox-read-message">
-                                {!! $sentEmail->content!!}
+                                {!! $html_email!!}
                             </div>
                         </div>
                         <div class="box-footer">
@@ -62,7 +62,6 @@
 
     <script>
         $(document).ready(function () {
-
             $("#compose-textarea").wysihtml5();
 
         });

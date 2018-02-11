@@ -53,7 +53,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('sentemail.sendNew')}}"><i class="fa fa-circle-o text-red"></i> Send New </a></li>
+                    <li><a href="{{route('sentemail.sendNew')}}"><i class="fa fa-circle-o text-red"></i> New Template Email </a></li>
                     <li><a href="{{route('sentemail.index')}}"><i class="fa fa-circle-o text-yellow"></i> View All</a></li>
                 </ul>
             </li>

@@ -22,15 +22,14 @@
         <form action="{{url('admin')}}" method="post" >
             {{csrf_field()}}
 
-
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('email'))
                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
                 @endif
             </div>
 

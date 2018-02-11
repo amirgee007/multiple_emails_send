@@ -30,16 +30,16 @@ Route::get('/admin', 'AdminAuth\AuthController@showLoginForm');
 Route::post('/admin', 'AdminAuth\AuthController@login');
 
 
-Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
+Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ,'namespace' =>'Admin'], function () {
 
     Route::post('/dashboard', array(
         'as' => 'post.dashboard',
-        'uses' => 'Admin\AdminController@dashboard'));
+        'uses' => 'AdminController@dashboard'));
 
 
     Route::get('/dashboard', array(
         'as' => 'get.dashboard',
-        'uses' => 'Admin\AdminController@dashboard'));
+        'uses' => 'AdminController@dashboard'));
 
 
     Route::get('/dashboard/logout', array(
@@ -50,58 +50,57 @@ Route::group(['middleware' => ['admin'] , 'prefix' => '/admin' ], function () {
     ////////////////////////////////Customer Routes///////////////////////////////////
     Route::get('/customer', array(
         'as' => 'customer.index',
-        'uses' => 'Admin\CustomerController@index'));
+        'uses' => 'CustomerController@index'));
 
     Route::get('/customer/create', array(
         'as' => 'customer.create',
-        'uses' => 'Admin\CustomerController@create'));
+        'uses' => 'CustomerController@create'));
 
     Route::post('/customer-csv/upload', array(
         'as' => 'customer.csv.upload',
-        'uses' => 'Admin\CustomerController@customersCsvUpload'));
+        'uses' => 'CustomerController@customersCsvUpload'));
 
     Route::post('/customer/add', array(
         'as' => 'customer.add',
-        'uses' => 'Admin\CustomerController@store'));
+        'uses' => 'CustomerController@store'));
 
 
     Route::get('/customer/{id}', array(
         'as' => 'customer.edit',
-        'uses' => 'Admin\CustomerController@edit'));
+        'uses' => 'CustomerController@edit'));
 
     Route::post('/customer/{id}', array(
         'as' => 'customer.update',
-        'uses' => 'Admin\CustomerController@update'));
+        'uses' => 'CustomerController@update'));
 
 
     Route::get('/customer/delete/{id}', array(
         'as' => 'customer.delete',
-        'uses' => 'Admin\CustomerController@destroy'));
+        'uses' => 'CustomerController@destroy'));
 
 
     ////////////////////////////////Sent Emails Routes///////////////////////////////////
     Route::get('/sentemails', array(
         'as' => 'sentemail.index',
-        'uses' => 'Admin\SentEmailController@index'));
+        'uses' => 'SentEmailController@index'));
 
     Route::get('/sentemails/show/{id}', array(
         'as' => 'sentemail.show',
-        'uses' => 'Admin\SentEmailController@show'));
+        'uses' => 'SentEmailController@show'));
 
     Route::get('/sentemails/{id}', array(
         'as' => 'sentemail.delete',
-        'uses' => 'Admin\SentEmailController@destroy'));
+        'uses' => 'SentEmailController@destroy'));
 
 
     ////////////////Send Emails Now////////////////////////
     Route::get('/send-new', array(
         'as' => 'sentemail.sendNew',
-        'uses' => 'Admin\SentEmailController@create'));
+        'uses' => 'SentEmailController@create'));
 
     Route::post('/send-new/save', array(
         'as' => 'sentemail.sendNew.save',
-        'uses' => 'Admin\SentEmailController@store'));
-
+        'uses' => 'SentEmailController@store'));
 
 
 

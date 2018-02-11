@@ -45,7 +45,7 @@ class CustomerController extends Controller
             return back();
 
         } catch (\Exception $ex) {
-            session()->flash('error_error', $ex->getMessage());
+            session()->flash('app_error', $ex->getMessage());
             return back();
         }
 
@@ -63,7 +63,6 @@ class CustomerController extends Controller
     {
         try{
             $customer = Customer::updateOrCreate(['email' => $request->email] ,$request->except('_token'));
-            $customer->update(['unique_url' => Helper::encrypt($customer->id)]);
             session()->flash('alert-success', 'Customer has been Successfully Created!');
 
         } catch (\Exception $ex) {

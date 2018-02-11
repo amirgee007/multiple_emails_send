@@ -47,9 +47,12 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>To</th>
-                                        <th>CC</th>
                                         <th>Subject</th>
-                                        <th>Contents</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Pic</th>
+                                        <th>End Text</th>
+                                        <th>CC</th>
                                         <th>Send At</th>
                                     </tr>
                                     </thead>
@@ -60,11 +63,13 @@
                                     @foreach(($sentEmails) as $email)
                                         <tr>
                                             <td><a target="_blank" href="{{route('sentemail.show' ,$email->id)}}"><i class="fa fa-star text-yellow"></i>{{$email->id}}</a></td>
-                                            <td>{{$email->sent_to}}</td>
-                                            <td>{{$email->cc}}</td>
+                                            <td>{{$email->customer->email}}</td>
                                             <td>{{$email->subject}}</td>
-                                            {{--<td><a style="font-size: 12px" target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{!!substr($email->content, 0, 30)!!}.....</a></td>--}}
-                                            <td><a  target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{{substr($email->content, 0, 30)}}.....</a></td>
+                                            <td>{{$email->title}}</td>
+                                            <td><a  target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{{substr($email->description, 0, 30)}}...</a></td>
+                                            <td><img align="center" alt="Image not load" src="{{$email->picture_url}}" width="50" height="50"></td>
+                                            <td><a  target="_blank" href="{{route('sentemail.show' ,$email->id)}}">{{substr($email->end_text, 0, 30)}}...</a></td>
+                                            <td>{{$email->cc}}</td>
                                             <td>{!! isset($email->created_at) ? @$email->created_at->diffForHumans() : 'Not Set'!!}</td>
                                             <td>
                                             </td>

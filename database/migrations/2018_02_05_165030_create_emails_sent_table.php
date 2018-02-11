@@ -19,12 +19,13 @@ class CreateEmailsSentTable extends Migration
             $table->increments('id');
             $table->integer('sent_to')->unsigned()->nullable();
             $table->foreign('sent_to')->references('id')->on('customers')->onDelete('cascade');
-//            $table->string('send_email')->nullable();
+            $table->string('subject')->nullable();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('picture_url')->nullable();
+            $table->text('end_text')->nullable();
             $table->string('cc')->nullable();
             $table->string('bcc')->nullable();
-            $table->string('subject')->nullable();
-            $table->longText('content');
-
             $table->timestamps();
         });
 

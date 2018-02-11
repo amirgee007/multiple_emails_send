@@ -34,12 +34,21 @@ class SentEmailController extends Controller
      */
     public function create()
     {
-        $html = view('admin.tempelates.email_tempelate1')->render();
         $customers = Customer::Active()->get();
-        return view('admin.sentemail.create', compact('customers','html'));
-
+        return view('admin.sentemail.create', compact('customers'));
     }
 
+
+
+
+    protected function validateImageUrl($url)
+    {
+        if (@getimagesize($url)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -48,6 +57,14 @@ class SentEmailController extends Controller
      */
     public function store(Request $request)
     {
+
+      $valid = $this->validateImageUrl($request->picture_url);
+       if(!$valid) {
+           session()->flash('app_error', 'Image URL is invalid please add a valid URL');
+           return redirect()->back()->withInput($request->all())->withErrors(
+               ['picture_url' => 'URL is not valid']);
+       }
+
         $job = (new SendCustomerEmail($request->all()))->delay(Carbon::now()->addSeconds(5));
 
         dispatch($job);
@@ -65,7 +82,15 @@ class SentEmailController extends Controller
     public function show($id)
     {
         $sentEmail = SentEmail::where('id' , $id) ->first();
-        return view('admin.sentemail.show', compact('sentEmail'));
+
+        $title = $sentEmail->title;
+        $description = $sentEmail->description;
+        $end_text = $sentEmail->end_text;
+        $image = $sentEmail->picture_url;
+
+        $html_email = view('admin.tempelates.email_tempelate1',compact('title','image','end_text','description'));
+
+        return view('admin.sentemail.show', compact('sentEmail','html_email'));
 
     }
 

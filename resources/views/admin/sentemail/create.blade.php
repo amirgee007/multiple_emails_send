@@ -7,10 +7,10 @@
 
 @section('header_styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/select2/select2.min.css') }}"/>
-    <link href="{{ asset('/assets/summernote/summernote.css') }}" rel="stylesheet"  type="text/css"/>
+{{--    <link href="{{ asset('/assets/summernote/summernote.css') }}" rel="stylesheet"  type="text/css"/>--}}
     {{--<link href="{{ asset('/css/refresh-btn.css') }}" rel="stylesheet"  type="text/css"/>--}}
-    <link href="{{ asset('/assets/summernote/font/summernote.ttf') }}" rel="stylesheet"  type="text/css"/>
-    <link href="{{ asset('/assets/summernote/font/summernote.woff') }}" rel="stylesheet"  type="text/css"/>
+{{--    <link href="{{ asset('/assets/summernote/font/summernote.ttf') }}" rel="stylesheet"  type="text/css"/>--}}
+{{--    <link href="{{ asset('/assets/summernote/font/summernote.woff') }}" rel="stylesheet"  type="text/css"/>--}}
 
 @stop
 
@@ -56,26 +56,45 @@
                             </div>
                             <div class="form-group">
                                 <label for="tittle">Subject</label>
-                                <input class="form-control" name="subject" placeholder="Subject" required>
+                                <input class="form-control" name="subject" placeholder="Subject" value="{{ old('subject') }}" required>
+                                @if ($errors->has('subject'))
+                                    <span class="help-block"><strong>{{ $errors->first('subject') }}</strong></span>
+                                @endif
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="tittle">Title</label>
+                                <input class="form-control" name="title" placeholder="Title" value="{{ old('title') }}" required>
+                                @if ($errors->has('title'))
+                                    <span class="help-block"><strong>{{ $errors->first('title') }}</strong></span>
+                                @endif
                             </div>
 
                             <div class="form-group">
-                                <label for="tittle">CC</label>
-                                <input class="form-control" type="email" name="cc" placeholder="CC" required>
+                                <label for="tittle">Description</label>
+                                <textarea class="form-control" name="description" placeholder="Description" required rows="4">{{old('description') }}</textarea>
+                                @if ($errors->has('description'))
+                                    <span class="help-block"><strong>{{ $errors->first('description') }}</strong></span>
+                                @endif
                             </div>
+
+                            <div class="form-group {{ $errors->has('picture_url') ? ' has-error' : '' }}">
+                                <label for="tittle">Picture Url</label>
+                                <input class="form-control" name="picture_url" placeholder="Picture Url" value="{{ old('picture_url') }}" required>
+                                @if ($errors->has('picture_url'))
+                                    <span class="help-block"><strong>{{ $errors->first('picture_url') }}</strong></span>
+                                @endif
+                            </div>
+
 
                             <div class="form-group">
-                                <label for="tittle">Message</label>
-                                <textarea id="ckeditor_full_summernote" name="content" rows="6">{!! $html !!}</textarea>
+                                <label for="tittle">End Text</label>
+                                <textarea class="form-control" name="end_text" placeholder="End Text" required rows="2">{{old('end_text') }}</textarea>
+                                @if ($errors->has('end_text'))
+                                    <span class="help-block"><strong>{{ $errors->first('end_text') }}</strong></span>
+                                @endif
                             </div>
-
-                            {{--<div class="form-group">--}}
-                                {{--<div class="btn btn-default btn-file">--}}
-                                    {{--<i class="fa fa-paperclip"></i> Add Attachment in an Email--}}
-                                    {{--<input type="file" name="attachments">--}}
-                                {{--</div>--}}
-                                {{--<p class="help-block">Max. 32MB</p>--}}
-                            {{--</div>--}}
 
                         </div>
                             <div class="box-footer">
@@ -93,7 +112,7 @@
 @endsection
 
 @section('footer_scripts')
-    <script  src="{{ asset('assets/summernote/summernote.js') }}"  type="text/javascript"></script>
+{{--    <script  src="{{ asset('assets/summernote/summernote.js') }}"  type="text/javascript"></script>--}}
 
     <script type="text/javascript" src="{{ asset('/plugins/select2/select2.full.min.js') }}"></script>
 
@@ -101,9 +120,9 @@
 
         $(function () {
 
-            $('#ckeditor_full_summernote').summernote({
-                height: 500
-            });
+//            $('#ckeditor_full_summernote').summernote({
+//                height: 500
+//            });
 
             $('input[type=radio][name=selection]').change(function() {
                 if (this.value == 'selected') {
