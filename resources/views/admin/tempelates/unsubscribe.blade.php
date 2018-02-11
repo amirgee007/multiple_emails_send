@@ -106,14 +106,16 @@
 
     <form action="{{route('unsubscribe.save')}}" method="POST" role="form" class="form-horizontal">
         {{csrf_field()}}
-
+        @if(Session::has('alert-success'))
         <div class="flash-message">
-            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                @if(Session::has('alert-' . $msg))
-                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                @endif
-            @endforeach
+            <p class="alert alert-success">{{ Session::get('alert-success') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
         </div>
+        @else
+        @if(Session::has('alert-danger'))
+        <div class="flash-message">
+            <p class="alert alert-danger">{{ Session::get('alert-danger') }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+        </div>
+        @endif
         <div class="form-group">
             <label for="email" class="col-sm-3 control-label">Email Address</label>
             <div class="col-sm-9">
@@ -153,12 +155,13 @@
             </div>
         </div>
 
-
         <div class="clearfix form-actions">
             <div class="pull-right">
                 <button type="submit" class="btn btn-default btn-danger">Unsubscribe me</button>
             </div>
         </div>
+        @endif
+
     </form>
 
     <footer class="footer">
